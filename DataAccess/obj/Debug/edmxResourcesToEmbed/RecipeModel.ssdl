@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="RecipesDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Chef">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Ingredient">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+  </EntityType>
+  <EntityType Name="IngredientLinks">
+    <Key>
+      <PropertyRef Name="RecipeID" />
+      <PropertyRef Name="IngredientID" />
+    </Key>
+    <Property Name="RecipeID" Type="int" Nullable="false" />
+    <Property Name="IngredientID" Type="int" Nullable="false" />
+    <Property Name="Amount" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Recipe">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="Description" Type="text" Nullable="false" />
+    <Property Name="ChefID" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_IngredientLinks_Ingredient">
+    <End Role="Ingredient" Type="Self.Ingredient" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="IngredientLinks" Type="Self.IngredientLinks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ingredient">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="IngredientLinks">
+        <PropertyRef Name="IngredientID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IngredientLinks_Recipe">
+    <End Role="Recipe" Type="Self.Recipe" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="IngredientLinks" Type="Self.IngredientLinks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Recipe">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="IngredientLinks">
+        <PropertyRef Name="RecipeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Recipe_Chef">
+    <End Role="Chef" Type="Self.Chef" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Recipe" Type="Self.Recipe" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Chef">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Recipe">
+        <PropertyRef Name="ChefID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="RecipesDBModelStoreContainer">
+    <EntitySet Name="Chef" EntityType="Self.Chef" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Ingredient" EntityType="Self.Ingredient" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="IngredientLinks" EntityType="Self.IngredientLinks" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Recipe" EntityType="Self.Recipe" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_IngredientLinks_Ingredient" Association="Self.FK_IngredientLinks_Ingredient">
+      <End Role="Ingredient" EntitySet="Ingredient" />
+      <End Role="IngredientLinks" EntitySet="IngredientLinks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IngredientLinks_Recipe" Association="Self.FK_IngredientLinks_Recipe">
+      <End Role="Recipe" EntitySet="Recipe" />
+      <End Role="IngredientLinks" EntitySet="IngredientLinks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Recipe_Chef" Association="Self.FK_Recipe_Chef">
+      <End Role="Chef" EntitySet="Chef" />
+      <End Role="Recipe" EntitySet="Recipe" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,38 @@
+﻿@using RecipeCourseProject.Models
+@model IngredientViewModel
+
+
+@{
+    ViewBag.Title = "Ingredients";
+}
+
+<div class="table-actions">
+    <h2>Ingredients</h2>
+    @Html.ActionLink("Add New Ingredient", "Edit", "Ingredient", null, new { @class = "btn btn-primary btn-sm" })
+</div>
+
+<table class="table table-striped">
+
+    <thead>
+    <th>ID</th>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+    </thead>
+
+    <tbody>
+        @foreach (IngredientsViewModel ing in Model.ingredientList)
+        {
+        <tr>
+            <td>@ing.ID</td>
+            <td>@ing.Name</td>
+            <td>@Html.ActionLink("View", "View", "Ingredient", new { id = ing.ID }, new { @class = "btn btn-primary btn-sm" })</td>
+            <td>@Html.ActionLink("Edit", "Edit", "Ingredient", new { id = ing.ID }, new { @class = "btn btn-primary btn-sm" })</td>
+            <td>@Html.ActionLink("Delete", "Delete", "Ingredient", new { id = ing.ID }, new { onclick = "return confirm('Are you sure you to delete this ingredient?');", @class = "btn btn-primary btn-sm" })</td>
+        </tr>
+        }
+    </tbody>
+
+</table>
+

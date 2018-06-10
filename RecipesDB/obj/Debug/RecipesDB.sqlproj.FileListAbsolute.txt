@@ -1,0 +1,6 @@
+C:\Users\User\source\repos\RecipeCourseProject\RecipesDB\bin\Debug\RecipesDB.dacpac
+C:\Users\User\source\repos\RecipeCourseProject\RecipesDB\bin\Debug\RecipesDB.dll
+C:\Users\User\source\repos\RecipeCourseProject\RecipesDB\bin\Debug\RecipesDB.pdb
+C:\Users\User\source\repos\RecipeCourseProject\RecipesDB\obj\Debug\RecipesDB.sqlprojAssemblyReference.cache
+C:\Users\User\source\repos\RecipeCourseProject\RecipesDB\obj\Debug\RecipesDB.dll
+C:\Users\User\source\repos\RecipeCourseProject\RecipesDB\obj\Debug\RecipesDB.pdb

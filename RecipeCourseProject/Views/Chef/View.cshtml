@@ -1,0 +1,41 @@
+﻿@using DataAccess
+@model RecipeCourseProject.Models.ChefViewModel
+
+
+@{
+    ViewBag.Title = "View";
+}
+
+<h2>View</h2>
+
+<div>
+    <h4>Chef</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <b>Recipes</b>
+        <table class="table-striped">
+
+            @foreach (Recipe item in Model.Recipes)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@Html.ActionLink("Go to", "View", "Recipe", new { id = item.ID }, null)</td>
+                </tr>
+            }
+
+        </table>
+
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>
